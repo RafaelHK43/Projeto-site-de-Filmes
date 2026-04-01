@@ -1,0 +1,11 @@
+{
+  "name": "Movie App",
+  "short_name": "MovieApp",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#141414",
+  "theme_color": "#E50914",
+  "icons": [
+    { "src": "icone.app.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

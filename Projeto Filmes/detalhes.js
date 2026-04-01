@@ -18,8 +18,6 @@ async function carregar() {
                 <p><strong>Nota:</strong> ⭐ ${filme.rating.average || "N/A"}</p>
             </div>
         `;
-    } catch (e) {
-        container.innerHTML = "<p>Erro ao carregar detalhes.</p>";
-    }
+    } catch (e) { container.innerHTML = "<p>Erro ao carregar detalhes.</p>"; }
 }
 carregar();

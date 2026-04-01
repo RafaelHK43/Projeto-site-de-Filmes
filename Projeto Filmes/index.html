@@ -5,20 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>App Filmes - Home</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#E50914">
+    <meta name="apple-mobile-web-app-capable" content="yes">
 </head>
 <body>
 
-    <h2>Buscar Filme</h2>
-    <form class="search-container" id="formBusca">
-        <input id="buscar" placeholder="Ex: Rick and Morty, Pokémon..." required autocomplete="off">
-        <button type="submit">Buscar</button>
-    </form>
+    <div id="toast-container"></div>
 
-    <h3>Resultados</h3>
-    <div id="resultados"></div>
+    <section>
+        <h2>Buscar Filme</h2>
+        <form class="search-container" id="formBusca">
+            <input id="buscar" placeholder="Ex: Rick and Morty, Pokémon..." required autocomplete="off">
+            <button type="submit">Buscar</button>
+        </form>
+    </section>
 
-    <h3>Meus Favoritos</h3>
-    <ul id="favoritos"></ul>
+    <section>
+        <h3>Resultados</h3>
+        <div id="resultados"></div>
+    </section>
+
+    <section style="border-bottom: none;">
+        <h3>⭐ Meus Favoritos</h3>
+        <ul id="favoritos"></ul>
+    </section>
 
     <script src="script.js"></script>
 </body>

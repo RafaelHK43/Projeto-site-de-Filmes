@@ -1,4 +1,3 @@
-// Agora salvamos objetos {id, nome} nos favoritos
 let favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
 
 document.addEventListener("DOMContentLoaded", mostrarFavoritos);
@@ -7,6 +6,29 @@ document.getElementById("formBusca").addEventListener("submit", (e) => {
     e.preventDefault();
     buscar();
 });
+
+// FUNÇÃO DE HARDWARE: Vibração
+function dispararFeedbackTatil() {
+    if (navigator.vibrate) {
+        navigator.vibrate(50);
+    }
+}
+
+// FUNÇÃO DE UI: Criar Notificação Visual
+function mostrarNotificacao(mensagem) {
+    const container = document.getElementById("toast-container");
+    const toast = document.createElement("div");
+    
+    toast.className = "toast";
+    toast.textContent = mensagem;
+    
+    container.appendChild(toast);
+    
+    // Remove o elemento do DOM após a animação de fadeOut terminar (3 segundos)
+    setTimeout(() => {
+        toast.remove();
+    }, 3200);
+}
 
 async function buscar() {
     const termo = document.getElementById("buscar").value.trim();
@@ -42,6 +64,10 @@ function adicionarFavorito(id, nome) {
     if (!favoritos.some(f => f.id === id)) {
         favoritos.push({ id, nome });
         localStorage.setItem("favoritos", JSON.stringify(favoritos));
+        
+        dispararFeedbackTatil(); 
+        mostrarNotificacao(`⭐ "${nome}" foi para os favoritos!`);
+        
         mostrarFavoritos();
     }
 }
@@ -64,7 +90,19 @@ function mostrarFavoritos() {
 }
 
 function remover(index) {
+    const nomeFilme = favoritos[index].nome;
     favoritos.splice(index, 1);
     localStorage.setItem("favoritos", JSON.stringify(favoritos));
+    
+    dispararFeedbackTatil(); 
+    mostrarNotificacao(`🗑️ "${nomeFilme}" removido.`);
+    
     mostrarFavoritos();
+}
+
+// PWA Service Worker
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(err => console.log(err));
+    });
 }
